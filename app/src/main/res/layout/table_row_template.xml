@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+    <!--  Номер в рейтинге  -->
+    <TextView
+        android:id="@+id/txtNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:textAppearance="?android:textAppearanceMedium"/>
+    <!--  Ник пользователя  -->
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:textAppearance="?android:textAppearanceMedium"/>
+    <!--  Результат пользователя  -->
+    <TextView
+        android:id="@+id/txtResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:fontFamily="monospace"
+        android:textAppearance="?android:textAppearanceMedium"/>
+</LinearLayout>

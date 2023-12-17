@@ -2,5 +2,6 @@
     <string name="app_name">RollingMaze</string>
     <string name="title_activity_amain_menu">AMainMenu</string>
     <string name="title_activity_cmain_menu">CMainMenuActivity</string>
-    <string name="title_activity_cgame_actyvivty">CGameActivity</string>
+    <string name="title_activity_cgame_actyvity">CGameActivity</string>
+    <string name="title_activity_table_actyvity">CRecordTableActivity</string>
 </resources>

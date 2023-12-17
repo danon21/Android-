@@ -29,7 +29,14 @@
         <activity
             android:name=".activities.CGameActivity"
             android:exported="true"
-            android:label="@string/title_activity_cgame_actyvivty"
+            android:label="@string/title_activity_cgame_actyvity"
+            android:theme="@style/Theme.RollingMaze"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.CRecordTableActivity"
+            android:exported="true"
+            android:label="@string/title_activity_table_actyvity"
             android:theme="@style/Theme.RollingMaze"
             android:screenOrientation="portrait" />
 

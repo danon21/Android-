@@ -20,4 +20,17 @@ class CMainMenuActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun goToTheRecordTableActivity(view: View){
+        val intent = Intent(this, CRecordTableActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun exitTheApp(view: View) {
+        val intent = Intent(applicationContext, CMainMenuActivity::class.java);
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent.putExtra("EXIT", true)
+        startActivity(intent)
+        finish()
+    }
+
 }
