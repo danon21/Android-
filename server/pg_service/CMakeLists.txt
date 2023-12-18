@@ -6,12 +6,29 @@ include(GNUInstallDirs)
 
 add_subdirectory(third_party/userver)
 
+
 # The Service
 add_executable(${PROJECT_NAME}
+        src/db/queries.hpp
+        src/db/queries.cpp
+        src/db/repository.hpp
+        src/db/repository.cpp
+        src/models/game.hpp
+        src/views/scores/get/view.hpp
+        src/views/scores/get/view.cpp
     src/main.cpp
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC userver-postgresql)
 target_include_directories(${PROJECT_NAME} PUBLIC src)
+
+
+# Functional Tests
+include(UserverTestsuite)
+
+userver_testsuite_add_simple(
+    REQUIREMENTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/requirements.txt"
+)
+
 
 # Install
 if(DEFINED ENV{PREFIX})
