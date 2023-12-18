@@ -8,6 +8,7 @@ name: Docker build
           - master
           - develop
           - feature/**
+          - server
 
 env:
     CMAKE_OPTIONS: -DUserverGrpc_VERSION=1.51.0
