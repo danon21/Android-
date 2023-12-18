@@ -31,7 +31,7 @@ jobs:
                     ccache-
 
           - name: Setup ccache
-            run: docker-compose run --rm pg_service-container bash -c 'ccache -M 2.0GB && ccache -s'
+            run: docker-compose -f /server/pg_service/docker-compose.yml run --rm pg_service-container bash -c 'ccache -M 2.0GB && ccache -s'
 
           - name: Cmake
             run: make docker-cmake-release
