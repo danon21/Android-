@@ -64,3 +64,8 @@ components_manager:
             path: /scores               
             method: GET                  
             task_processor: main-task-processor
+            
+        handler-scores-upload: 
+            path: /scores/upload               
+            method: POST                  
+            task_processor: main-task-processor

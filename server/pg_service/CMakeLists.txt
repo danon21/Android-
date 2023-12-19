@@ -14,8 +14,12 @@ add_executable(${PROJECT_NAME}
         src/db/repository.hpp
         src/db/repository.cpp
         src/models/game.hpp
+        src/utils/parsers.hpp
+        src/utils/parsers.cpp
         src/views/scores/get/view.hpp
         src/views/scores/get/view.cpp
+        src/views/scores/upload/post/view.hpp
+        src/views/scores/upload/post/view.cpp
     src/main.cpp
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC userver-postgresql)

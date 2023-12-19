@@ -8,6 +8,7 @@
 #include <userver/utils/daemon_run.hpp>
 
 #include "views/scores/get/view.hpp"
+#include "views/scores/upload/post/view.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list =
@@ -16,8 +17,9 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::TestsuiteSupport>()
           .Append<userver::components::HttpClient>()
           .Append<userver::server::handlers::TestsControl>()
-          .Append<pg_service::views::scores::get::View>()
           .Append<userver::components::Postgres>("postgres-db_1")
+          .Append<pg_service::views::scores::get::View>()
+          .Append<pg_service::views::scores::upload::post::View>()
           .Append<userver::clients::dns::Component>();
 
   return userver::utils::DaemonMain(argc, argv, component_list);

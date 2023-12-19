@@ -6,4 +6,8 @@ namespace pg_service::queries {
 
 extern const userver::storages::postgres::Query kGetGames;
 
+extern const userver::storages::postgres::Query kInsertGame;
+
+extern const userver::storages::postgres::Query kInsertUser;
+
 }  // namespace pg_service::queries

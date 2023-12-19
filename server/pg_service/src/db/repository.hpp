@@ -16,10 +16,9 @@ class Repository {
                 .FindComponent<userver::components::Postgres>("postgres-db_1")
                 .GetCluster()) {}
 
-  // BeginTransaction()
+  std::vector<models::Game> GetGames(const std::string& user_name) const;
 
-  std::vector<pg_service::models::Game> GetGames(
-      const std::string& user_name) const;
+  void InsertGame(const models::Game&);
 
  private:
   userver::storages::postgres::ClusterPtr pg_cluster_;

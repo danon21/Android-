@@ -4,6 +4,8 @@ namespace pg_service::queries {
 
 const userver::storages::postgres::Query kGetGames{
     R"~(
+        -- $1 - user_name
+
         SELECT
             user_name,
             difficulty,
@@ -17,6 +19,38 @@ const userver::storages::postgres::Query kGetGames{
             u.user_id = g.user_id;
     )~",
     userver::storages::postgres::Query::Name{"get_games"},
+};
+
+const userver::storages::postgres::Query kInsertGame{
+    R"~(
+        -- $1 - user_id
+        -- $2 - difficulty
+        -- $3 - game_score
+
+        INSERT INTO
+            db_service.games(user_id, difficulty, game_score)
+        SELECT
+            $1,
+            $2,
+            to_timestamp($3, 'HH24:MI:SS:MS') - to_timestamp('00:00:00:000', 'HH24:MI:SS:MS');
+    )~",
+    userver::storages::postgres::Query::Name{"insert_game"},
+};
+
+const userver::storages::postgres::Query kInsertUser{
+    R"~(
+        -- $1 - user_name
+
+        INSERT INTO
+            db_service.users(user_name)
+        SELECT
+            $1
+        ON CONFLICT (user_name) DO UPDATE
+        SET
+            user_name = $1
+        RETURNING user_id;
+    )~",
+    userver::storages::postgres::Query::Name{"insert_user"},
 };
 
 }  // namespace pg_service::queries

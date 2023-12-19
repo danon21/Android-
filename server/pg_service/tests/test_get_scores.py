@@ -2,7 +2,7 @@ import pytest
 
 
 @pytest.mark.pgsql('db_1', files=['initial_data.sql'])
-async def test_db_initial_data(service_client):
+async def test_handler(service_client):
     response = await service_client.get(
         '/scores',
         params={'user_name': 'user1'},
@@ -20,3 +20,22 @@ async def test_db_initial_data(service_client):
             "user_name": "user1"
         }
     ]
+
+
+@pytest.mark.pgsql('db_1', files=['initial_data.sql'])
+async def test_empty_query(service_client):
+    response = await service_client.get(
+        '/scores',
+    )
+    assert response.status == 200
+    assert response.json() == {'games': []}
+
+
+@pytest.mark.pgsql('db_1', files=['initial_data.sql'])
+async def test_unknown_user(service_client):
+    response = await service_client.get(
+        '/scores',
+        params={'user_name': 'user3'},
+    )
+    assert response.status == 200
+    assert response.json() == {'games': []}
