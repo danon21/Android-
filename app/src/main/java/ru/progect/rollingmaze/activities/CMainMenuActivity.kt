@@ -54,11 +54,4 @@ class CMainMenuActivity : AppCompatActivity() {
         intent.putExtra("username", editTextUserId.text.toString())
         startActivity(intent)
     }
-
-    fun saveUsernameInEditTextUserId(view: View){
-        /**
-         * Метод для сохраниения текста в поле ввода
-         */
-        username = editTextUserId.text.toString()
-    }
 }

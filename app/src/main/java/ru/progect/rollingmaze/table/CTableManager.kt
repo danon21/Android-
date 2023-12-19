@@ -1,5 +1,12 @@
 package ru.progect.rollingmaze.table
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.Call
+import retrofit2.awaitResponse
+import ru.data.CGame
+import ru.data.СApiManager
+
 data class DataRow(val numb: String, val name: String, val result: String)
 
 class CTableManager(val dataRowList: List<DataRow>) {
@@ -9,6 +16,7 @@ class CTableManager(val dataRowList: List<DataRow>) {
     companion object {
         fun getData(): List<DataRow>{
             val data = mutableListOf<DataRow>(DataRow("№", "Имя", "Время"))
+
             data.add(DataRow("1", "Name1", "12.2"))
             data.add(DataRow("2", "Name2", "13.2"))
             data.add(DataRow("3", "Name3", "14.2"))
@@ -31,6 +39,29 @@ class CTableManager(val dataRowList: List<DataRow>) {
             data.add(DataRow("20", "Name5", "16.2"))
             data.add(DataRow("21", "Name6", "17.2"))
             return data.toList()
+        }
+
+
+        /**
+         * Метод возвращает записи из таблицы рекордов
+         */
+        private suspend fun getListCGame(): List<CGame> {
+            val apiManager = СApiManager()
+            val call: Call<List<CGame>> = apiManager.apiService.getGamesList()
+
+            return withContext(Dispatchers.IO) {
+                try {
+                    val response = call.awaitResponse()
+
+                    if (response.isSuccessful) {
+                        response.body() ?: emptyList()
+                    } else {
+                        emptyList()
+                    }
+                } catch (e: Exception) {
+                    emptyList()
+                }
+            }
         }
     }
 }
