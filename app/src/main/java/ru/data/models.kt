@@ -8,5 +8,5 @@ data class CGame(
     val id: String,
     val user_id: String,
     val difficulty: Int,
-
+    val score: String
 )
