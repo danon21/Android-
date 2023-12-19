@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:orientation="vertical"
@@ -23,54 +24,88 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="40dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="Имя для сохранения результата в истории"
+
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/editTextUserId"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:inputType="text|textNoSuggestions"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
+            android:background="@drawable/btn_rounded"
+            android:paddingLeft="7dp"
+            android:hint="Введите имя"
+
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_marginTop="40dp">
 
         <Button
             android:id="@+id/buttGameStart"
             android:onClick="goToTheGameActivity"
-            style="@style/Widget.Material3.Button.Icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:text="Начать игру"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="34sp"
-            android:textStyle="bold"
+
             android:background="@drawable/btn_rounded"
-            android:layout_marginBottom="20dp" />
+
+            android:text="Начать игру"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#000000"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/buttRecordTable"
             android:onClick="goToTheRecordTableActivity"
-            style="@style/Widget.Material3.Button.Icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
+
+            android:background="@drawable/btn_rounded"
+
             android:text="Таблица рекордов"
+            android:fontFamily="monospace"
             android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="#000000"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:background="@drawable/btn_rounded"
-            android:layout_marginBottom="20dp"/>
-
-        <Button
-            android:id="@+id/buttExit"
-            android:onClick="exitTheApp"
-            style="@style/Widget.Material3.Button.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Выход"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            android:background="@drawable/btn_rounded"
-            android:layout_marginBottom="20dp"/>
+            />
     </LinearLayout>
-
 </androidx.appcompat.widget.LinearLayoutCompat>

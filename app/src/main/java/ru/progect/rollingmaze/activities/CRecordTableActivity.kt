@@ -15,6 +15,7 @@ class CRecordTableActivity : AppCompatActivity()  {
     private lateinit var binding : ActivityRecordTableBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var tableManager: CTableManager
+    private var username : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,10 +27,13 @@ class CRecordTableActivity : AppCompatActivity()  {
 
         tableManager = CTableManager(CTableManager.getData())
         recyclerView.adapter = CTableAdapter(tableManager)
+
+        username = intent.getStringExtra("username").toString()
     }
 
     override fun onBackPressed() {
         val intent = Intent(this, CMainMenuActivity::class.java)
+        intent.putExtra("username", username)
         startActivity(intent)
     }
 
