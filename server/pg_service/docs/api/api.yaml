@@ -129,6 +129,7 @@ components:
     schemas:
         UserName:
             type: string
+            description: User's login
             pattern: ^[0-9a-z]+$
             maxLength: 32
             example: user1
@@ -142,10 +143,7 @@ components:
               - game_score
             properties:
                 user_name:
-                    type: string
-                    description: User's login
-                    pattern: ^[0-9a-z]+$
-                    maxLength: 32
+                    $ref: '#/components/schemas/UserName'
                 difficulty:
                     type: integer
                     description: Difficulty of level
@@ -155,7 +153,7 @@ components:
                 game_score:
                     type: string
                     description: Time of game
-                    pattern: ^[0-9a-z]+$
+                    pattern: (?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d):(?:\d\d\d)
                     maxLength: 32
 
         ErrorResponse:
@@ -165,6 +163,7 @@ components:
                     type: string
                     pattern: ^[0-9a-z]+$
                     maxLength: 32
+                    example: Bad request
             additionalProperties: false
             required:
               - message
