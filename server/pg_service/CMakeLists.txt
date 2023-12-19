@@ -20,6 +20,8 @@ add_executable(${PROJECT_NAME}
         src/views/scores/get/view.cpp
         src/views/scores/upload/post/view.hpp
         src/views/scores/upload/post/view.cpp
+        src/views/user_rank/get/view.hpp
+        src/views/user_rank/get/view.cpp
     src/main.cpp
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC userver-postgresql)

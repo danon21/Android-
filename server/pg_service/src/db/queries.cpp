@@ -44,6 +44,34 @@ const userver::storages::postgres::Query kGetGames{
     userver::storages::postgres::Query::Name{"get_games"},
 };
 
+const userver::storages::postgres::Query kGetUserRank{
+    R"~(
+        -- $1 - user_name
+
+        WITH t AS (
+            SELECT
+                user_name,
+                row_number() OVER (ORDER BY MIN(game_score)) order_number
+            FROM
+                db_service.users u,
+                db_service.games g
+            WHERE
+                u.user_id = g.user_id
+            GROUP BY
+                user_name, difficulty
+            ORDER BY
+                MIN(game_score) ASC
+        )
+        SELECT
+            t.order_number
+        FROM t
+        WHERE
+            t.user_name = $1
+        LIMIT 1;
+    )~",
+    userver::storages::postgres::Query::Name{"get_user_rank"},
+};
+
 const userver::storages::postgres::Query kInsertGame{
     R"~(
         -- $1 - user_id

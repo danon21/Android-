@@ -5,8 +5,8 @@
 
 namespace pg_service::errors {
 
-struct ParseError : public std::runtime_error {
-  ParseError(const std::string& message) : std::runtime_error(message) {}
+class ParseError : public std::runtime_error {
+  using std::runtime_error::runtime_error;
 };
 
 }  // namespace pg_service::errors

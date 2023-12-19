@@ -8,7 +8,9 @@
 namespace pg_service::models {
 
 struct Game {
-  std::string user_name;
+  using UserName = std::string;
+
+  UserName user_name;
   int difficulty;
   std::string game_score;
 };

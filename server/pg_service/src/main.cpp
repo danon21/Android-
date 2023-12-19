@@ -9,6 +9,7 @@
 
 #include "views/scores/get/view.hpp"
 #include "views/scores/upload/post/view.hpp"
+#include "views/user_rank/get/view.hpp"
 
 int main(int argc, char* argv[]) {
   auto component_list =
@@ -20,6 +21,7 @@ int main(int argc, char* argv[]) {
           .Append<userver::components::Postgres>("postgres-db_1")
           .Append<pg_service::views::scores::get::View>()
           .Append<pg_service::views::scores::upload::post::View>()
+          .Append<pg_service::views::user_rank::get::View>()
           .Append<userver::clients::dns::Component>();
 
   return userver::utils::DaemonMain(argc, argv, component_list);

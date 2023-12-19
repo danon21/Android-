@@ -8,6 +8,8 @@ extern const userver::storages::postgres::Query kGetBestGames;
 
 extern const userver::storages::postgres::Query kGetGames;
 
+extern const userver::storages::postgres::Query kGetUserRank;
+
 extern const userver::storages::postgres::Query kInsertGame;
 
 extern const userver::storages::postgres::Query kInsertUser;

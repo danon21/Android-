@@ -13,12 +13,23 @@ std::vector<models::Game> Repository::GetBestGames() const {
 }
 
 std::vector<pg_service::models::Game> Repository::GetGames(
-    const std::string& user_name) const {
+    const UserName& user_name) const {
   return pg_cluster_
       ->Execute(userver::storages::postgres::ClusterHostType::kMaster,
                 queries::kGetGames, user_name)
       .AsContainer<std::vector<models::Game>>(
           userver::storages::postgres::kRowTag);
+}
+
+int Repository::GetUserRank(const UserName& user_name) const {
+  auto res = pg_cluster_->Execute(
+      userver::storages::postgres::ClusterHostType::kMaster,
+      queries::kGetUserRank, user_name);
+  if (res.IsEmpty()) {
+    throw UnknownUserError{fmt::format("Unknown user: {}", user_name)};
+  }
+
+  return res.AsSingleRow<int>();
 }
 
 void Repository::InsertGame(const models::Game& game) {
