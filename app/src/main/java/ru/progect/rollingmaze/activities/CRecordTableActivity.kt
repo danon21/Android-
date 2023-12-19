@@ -3,9 +3,11 @@ package ru.progect.rollingmaze.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.data.getUserRank
 import ru.progect.rollingmaze.R
 import ru.progect.rollingmaze.databinding.ActivityRecordTableBinding
 import ru.progect.rollingmaze.table.CTableAdapter
@@ -14,6 +16,7 @@ import ru.progect.rollingmaze.table.CTableManager
 class CRecordTableActivity : AppCompatActivity()  {
     private lateinit var binding : ActivityRecordTableBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var textView: TextView
     private lateinit var tableManager: CTableManager
     private var username : String = ""
 
@@ -29,6 +32,9 @@ class CRecordTableActivity : AppCompatActivity()  {
         recyclerView.adapter = CTableAdapter(tableManager)
 
         username = intent.getStringExtra("username").toString()
+
+        textView = findViewById(R.id.TxtViewBestRes)
+        textView.text = getUserRank(username)
     }
 
     override fun onBackPressed() {

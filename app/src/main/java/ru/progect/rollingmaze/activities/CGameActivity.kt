@@ -8,12 +8,15 @@ import ru.progect.rollingmaze.game.GameHandler
 class CGameActivity : AppCompatActivity() {
     private lateinit var binding : ActivityGameBinding
     private lateinit var gameHandler: GameHandler
+    private var username : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
 
         gameHandler = GameHandler(this, binding.gameSurface)
+
+        username = intent.getStringExtra("username").toString()
 
         setContentView(binding.root)
         gameHandler.start()
