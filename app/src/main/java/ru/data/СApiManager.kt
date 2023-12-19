@@ -16,22 +16,22 @@ class СApiManager {
 
     val apiService: IApiService = retrofit.create(IApiService::class.java)
 
-    fun getGames(callback: Callback<List<CGame>>) {
+    /**
+     * Метод возвращает таблицу рекордов
+     */
+    fun getRecordTableData(callback: Callback<List<CGame>>) {
         val call: Call<List<CGame>> = apiService.getGamesList()
         call.enqueue(object : Callback<List<CGame>> {
+            // При наличие ответа от сервера
             override fun onResponse(call: Call<List<CGame>>, response: Response<List<CGame>>) {
                 if (response.isSuccessful) {
                     val games: List<CGame>? = response.body()
-                    games?.let {
-                        callback.onResponse(call, Response.success(it))
-                    } ?: run {
-                        callback.onFailure(call, Throwable("Empty response"))
-                    }
+                    callback.onResponse(call, Response.success(games))
                 } else {
                     callback.onFailure(call, Throwable("Unsuccessful response"))
                 }
             }
-
+            // При проблеме с сервером
             override fun onFailure(call: Call<List<CGame>>, t: Throwable) {
                 callback.onFailure(call, t)
             }
