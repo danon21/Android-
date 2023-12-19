@@ -33,7 +33,7 @@ userver::formats::json::Value View::HandleRequestJsonThrow(
     }
     request.GetHttpResponse().SetStatus(
         userver::server::http::HttpStatus::kBadRequest);
-    result["message"] = R"(Bad "game_score" format)";
+    result["message"] = "Bad game_score format";
     return result.ExtractValue();
   }
 

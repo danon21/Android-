@@ -16,6 +16,8 @@ class Repository {
                 .FindComponent<userver::components::Postgres>("postgres-db_1")
                 .GetCluster()) {}
 
+  std::vector<models::Game> GetBestGames() const;
+
   std::vector<models::Game> GetGames(const std::string& user_name) const;
 
   void InsertGame(const models::Game&);

@@ -4,6 +4,14 @@
 
 namespace pg_service::db {
 
+std::vector<models::Game> Repository::GetBestGames() const {
+  return pg_cluster_
+      ->Execute(userver::storages::postgres::ClusterHostType::kMaster,
+                queries::kGetBestGames)
+      .AsContainer<std::vector<models::Game>>(
+          userver::storages::postgres::kRowTag);
+}
+
 std::vector<pg_service::models::Game> Repository::GetGames(
     const std::string& user_name) const {
   return pg_cluster_

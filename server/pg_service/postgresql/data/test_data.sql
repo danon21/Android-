@@ -10,4 +10,6 @@ INSERT INTO
 VALUES 
     ('id1', 1, interval '35s 457ms'),
     ('id2', 1, interval '1m 6s 024ms'),
-    ('id1', 2, interval '2m 33s');
+    ('id1', 2, interval '2m 33s'),
+    ('id1', 1, interval '56s 400ms'),
+    ('id2', 3, interval '11s');

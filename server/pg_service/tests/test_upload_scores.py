@@ -21,9 +21,9 @@ async def test_handler(service_client):
 
     assert response.json()['games'] == [
         {
-            "difficulty": 1,
-            "game_score": "00:00:35:457",
-            "user_name": "user1",
+            'difficulty': 1,
+            'game_score': '00:00:35:457',
+            'user_name': 'user1',
         },
     ]
 
@@ -35,21 +35,21 @@ async def test_handler(service_client):
             {
                 'game_score': '00:00:33',
             },
-            'Missing "user_name"'
+            'Missing user_name',
         ),
         pytest.param(
             {
                 'user_name': 'user1',
                 'game_score': '00:00:33',
             },
-            'Missing "difficulty"'
+            'Missing difficulty',
         ),
         pytest.param(
             {
                 'user_name': 'user1',
                 'difficulty': 1,
             },
-            'Missing "game_score"'
+            'Missing game_score',
         ),
         pytest.param(
             {
@@ -57,7 +57,7 @@ async def test_handler(service_client):
                 'difficulty': 1,
                 'game_score': '00:00:33',
             },
-            '"user_name" should be string'
+            'user_name should be string',
         ),
         pytest.param(
             {
@@ -65,7 +65,7 @@ async def test_handler(service_client):
                 'difficulty': '1',
                 'game_score': '00:00:33',
             },
-            '"difficulty" should be integer'
+            'difficulty should be integer',
         ),
         pytest.param(
             {
@@ -73,7 +73,7 @@ async def test_handler(service_client):
                 'difficulty': 1,
                 'game_score': 0,
             },
-            '"game_score" should be string'
+            'game_score should be string',
         ),
         pytest.param(
             {
@@ -81,7 +81,7 @@ async def test_handler(service_client):
                 'difficulty': 1,
                 'game_score': '00:00:33',
             },
-            '"user_name" can\'t be empty'
+            'user_name can\'t be empty',
         ),
         pytest.param(
             {
@@ -89,7 +89,7 @@ async def test_handler(service_client):
                 'difficulty': 1,
                 'game_score': '',
             },
-            '"game_score" can\'t be empty'
+            'game_score can\'t be empty',
         ),
         pytest.param(
             {
@@ -97,7 +97,7 @@ async def test_handler(service_client):
                 'difficulty': 1,
                 'game_score': 'sdfasdfsf',
             },
-            'Bad "game_score" format'
+            'Bad game_score format',
         ),
     ]
 )
