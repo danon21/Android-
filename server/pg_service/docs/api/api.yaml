@@ -1,0 +1,184 @@
+openapi: 3.0.0
+info:
+    description: pg_service
+    title: pg_service 1.0
+    version: '1.0'
+
+servers:
+  - url: https://shiny-space-fiesta-ppw9xv6g6w92rw7q-8080.app.github.dev
+    description: local
+
+paths:
+    /scores:
+        get:
+            description: |
+                A handle for getting scores
+            parameters:
+              - in: query
+                name: user_name
+                schema:
+                  $ref: '#/components/schemas/UserName'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/GameScore'
+                                maxItems: 10000
+                '404':
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/EmptyResponse'
+                '429':
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                default:
+                    description: Not Found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+
+    /scores/upload:
+        post:
+            description: |
+                A handle for posting player's score
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GameScore'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/EmptyResponse'
+                400:
+                    description: Bad request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                '429':
+                    description: Too Many Requests
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                default:
+                    description: Too Many Requests
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+
+    /user_rank:
+        get:
+            description: |
+                A handle for getting user's rank
+            parameters:
+              - in: query
+                required: true
+                name: user_name
+                schema:
+                    $ref: '#/components/schemas/UserName'
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserRankResponse'
+                400:
+                    description: Bad request
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                404:
+                    description: Not found
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                '429':
+                    description: Too Many Requests
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+                default:
+                    description: Too Many Requests
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+    schemas:
+        UserName:
+            type: string
+            description: User's login
+            pattern: ^[0-9a-z]+$
+            maxLength: 32
+            example: user1
+
+        GameScore:
+            type: object
+            additionalProperties: false
+            required:
+              - user_name
+              - difficulty
+              - game_score
+            properties:
+                user_name:
+                    $ref: '#/components/schemas/UserName'
+                difficulty:
+                    type: integer
+                    description: Difficulty of level
+                    maximum: 1024
+                    minimum: 0
+                    format: int32
+                game_score:
+                    type: string
+                    description: Time of game
+                    pattern: (?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d):(?:\d\d\d)
+                    maxLength: 32
+
+        ErrorResponse:
+            type: object
+            properties:
+                message:
+                    type: string
+                    pattern: ^[0-9a-z]+$
+                    maxLength: 32
+                    example: Bad request
+            additionalProperties: false
+            required:
+              - message
+
+        UserRankResponse:
+            type: object
+            properties:
+                user_rank:
+                    description: position on user among best scores
+                    type: integer
+            additionalProperties: false
+            required:
+              - user_rank
+
+        EmptyResponse:
+            type: object
+            properties: {}
+            additionalProperties: false

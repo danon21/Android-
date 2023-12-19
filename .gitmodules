@@ -1,0 +1,3 @@
+[submodule "server/pg_service/third_party/userver"]
+	path = server/pg_service/third_party/userver
+	url = https://github.com/userver-framework/userver.git
