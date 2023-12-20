@@ -1,4 +1,4 @@
-package io.swagger.client.infrastructure
+package ru.data.infrastructure
 
 /**
  * Defines a config object for a given request.

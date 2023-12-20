@@ -9,7 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-package io.swagger.client.models
+package ru.data.models
+
+import com.squareup.moshi.Json
 
 
 /**
@@ -19,6 +21,6 @@ package io.swagger.client.models
 data class UserRankResponse (
 
     /* position on user among best scores */
-    val userRank: kotlin.Int
+    @Json(name = "user_rank") val userRank: kotlin.Int
 ) {
 }

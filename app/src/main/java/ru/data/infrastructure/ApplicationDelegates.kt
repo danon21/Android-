@@ -1,4 +1,4 @@
-package io.swagger.client.infrastructure
+package ru.data.infrastructure
 
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
