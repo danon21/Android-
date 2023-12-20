@@ -26,7 +26,7 @@ userver::formats::json::Value View::HandleRequestJsonThrow(
   const auto& name = request.GetArg("user_name");
 
   userver::formats::json::ValueBuilder result;
-  result["games"] =
+  result =
       name.empty() ? repository_.GetBestGames() : repository_.GetGames(name);
 
   return result.ExtractValue();
