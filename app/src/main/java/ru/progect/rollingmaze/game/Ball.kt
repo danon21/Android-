@@ -2,15 +2,22 @@ package ru.progect.rollingmaze.game
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Point
 import android.graphics.PointF
+import android.graphics.RectF
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import androidx.core.graphics.toPoint
+import androidx.core.graphics.toPointF
+import kotlin.math.abs
+import kotlin.math.sign
 
 class Ball(context: Context,
-           private val r: Float,
+           val r: Int,
            pos: PointF
 ): SensorEventListener {
     private val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE)  as SensorManager
@@ -19,45 +26,53 @@ class Ball(context: Context,
     }
 
     var acceleration: PointF    = PointF(0f, 0f)
-    private var prevPos: PointF = pos
-    private var currPos: PointF = pos
+    var velocity: PointF = PointF(0f, 0f)
+    var position: PointF = pos
 
-    var position: PointF
-        get() = currPos
-        set(value) {
-          currPos = value
-          prevPos = value
-        }
+    val maxVelocity: Float = 300f
+
+    var accelerationFactor: Float= 500f
+    private val accelerationThreshold = 0.2
 
     fun update(dt: Float) {
-        val aCoef = 2000
+        velocity.x += acceleration.x*dt*accelerationFactor
+        if (abs(velocity.x) > maxVelocity)
+            velocity.x = sign(velocity.x) * maxVelocity
+        velocity.y += acceleration.y*dt*accelerationFactor
+        if (abs(velocity.y) > maxVelocity)
+            velocity.y = sign(velocity.y) * maxVelocity
+        position.x += velocity.x*dt
+        position.y += velocity.y*dt
+    }
 
-        var nextPosX = 2*currPos.x - prevPos.x
-        var nextPosY = 2*currPos.y - prevPos.y
-        if (acceleration.length() > 0.2) {
-            nextPosX += 0.5f*acceleration.x*dt*dt*aCoef
-            nextPosY += 0.5f*acceleration.y*dt*dt*aCoef
-        }
-        prevPos = currPos
-        currPos = PointF(nextPosX, nextPosY)
+    fun moveX(dt: Float) {
+        velocity.x += acceleration.x*dt*accelerationFactor
+        if (abs(velocity.x) > maxVelocity)
+            velocity.x = sign(velocity.x) * maxVelocity
+        position.x += velocity.x*dt
+    }
+
+    fun moveY(dt: Float) {
+        velocity.y += acceleration.y*dt*accelerationFactor
+        if (abs(velocity.y) > maxVelocity)
+            velocity.y = sign(velocity.y) * maxVelocity
+        position.y += velocity.y*dt
     }
 
     fun draw(canvas: Canvas, color: Int) {
         val paint = Paint()
+        paint.color = Color.argb(200, 125, 128, 128)
+        canvas.drawOval(RectF(position.x-r, position.y + r / 4, position.x+r, position.y + r), paint)
         paint.color = color
-        canvas.drawCircle(currPos.x, currPos.y, r, paint)
+        canvas.drawCircle(position.x, position.y, r.toFloat(), paint)
     }
 
-    fun inverseVelX() {
-        val temp = currPos.x
-        currPos.x = prevPos.x
-        prevPos.x = temp
+    fun inverseVelX(loss: Float = 0.5f) {
+        velocity.x *= -loss
     }
 
-    fun inverseVelY() {
-        val temp = currPos.y
-        currPos.y = prevPos.y
-        prevPos.y = temp
+    fun inverseVelY(loss: Float = 0.5f) {
+        velocity.y *= -loss
     }
 
     override fun onSensorChanged(event: SensorEvent) {

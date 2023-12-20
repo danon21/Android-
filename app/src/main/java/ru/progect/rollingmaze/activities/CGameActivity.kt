@@ -1,9 +1,15 @@
 package ru.progect.rollingmaze.activities
 
+import android.graphics.Point
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
+import android.util.Size
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import ru.progect.rollingmaze.databinding.ActivityGameBinding
 import ru.progect.rollingmaze.game.GameHandler
+
 
 class CGameActivity : AppCompatActivity() {
     private lateinit var binding : ActivityGameBinding
@@ -19,16 +25,26 @@ class CGameActivity : AppCompatActivity() {
         username = intent.getStringExtra("username").toString()
 
         setContentView(binding.root)
+
+        val metrics = DisplayMetrics()
+        windowManager.defaultDisplay.getMetrics(metrics)
+//        Log.wtf("width", binding.gameSurface.width.toString())
+
+        gameHandler = GameHandler(this, resources, binding.gameSurface, Size(metrics.widthPixels, metrics.heightPixels))
         gameHandler.start()
     }
 
-    override fun onResume() {
-        super.onResume()
-        gameHandler.start()
+    fun onPauseResume(view: View) {
+        if (gameHandler.isRunning) {
+            super.onPause()
+            gameHandler.pause()
+        } else {
+            super.onResume()
+            gameHandler.start()
+        }
     }
 
-    override fun onPause() {
-        super.onPause()
-        gameHandler.pause()
+    fun onBack(view: View) {
+
     }
 }
