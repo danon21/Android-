@@ -20,8 +20,6 @@ class CGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
 
-        gameHandler = GameHandler(this, binding.gameSurface)
-
         username = intent.getStringExtra("username").toString()
 
         setContentView(binding.root)
