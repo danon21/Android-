@@ -1,4 +1,4 @@
-package io.swagger.client.infrastructure
+package ru.data.infrastructure
 
 typealias MultiValueMap = Map<String, List<String>>
 

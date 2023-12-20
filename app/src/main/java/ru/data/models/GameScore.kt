@@ -9,22 +9,23 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-package io.swagger.client.models
+package ru.data.models
 
+import com.squareup.moshi.Json
+import ru.data.models.UserName
 
 /**
  * 
- * @param userName User's login
+ * @param userName 
  * @param difficulty Difficulty of level
  * @param gameScore Time of game
  */
 data class GameScore (
 
-    /* User's login */
-    val userName: kotlin.String,
+    @Json(name = "user_name") val userName: UserName,
     /* Difficulty of level */
     val difficulty: kotlin.Int,
     /* Time of game */
-    val gameScore: kotlin.String
+    @Json(name = "game_score") val gameScore: kotlin.String
 ) {
 }

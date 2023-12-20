@@ -17,7 +17,6 @@ class CRecordTableActivity : AppCompatActivity()  {
     private lateinit var binding : ActivityRecordTableBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var textView: TextView
-    private lateinit var tableManager: CTableManager
     private var username : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +27,19 @@ class CRecordTableActivity : AppCompatActivity()  {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        tableManager = CTableManager(CTableManager.getData())
-        recyclerView.adapter = CTableAdapter(tableManager)
-
         username = intent.getStringExtra("username").toString()
 
         textView = findViewById(R.id.TxtViewBestRes)
-        textView.text = getUserRank(username)
+
+        Thread {
+            val rank = getUserRank(username)
+            val tableManager = CTableManager(CTableManager.getData())
+
+            runOnUiThread {
+                textView.text = rank
+                recyclerView.adapter = CTableAdapter(tableManager)
+            }
+        }.start()
     }
 
     override fun onBackPressed() {

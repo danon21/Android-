@@ -8,7 +8,7 @@ async def test_handler(service_client):
         params={'user_name': 'user1'},
     )
     assert response.status == 200
-    assert response.json()['games'] == [
+    assert response.json() == [
         {
             "difficulty": 1,
             "game_score": "00:00:35:457",
@@ -28,7 +28,7 @@ async def test_empty_query(service_client):
         '/scores',
     )
     assert response.status == 200
-    assert response.json()['games'] == [
+    assert response.json() == [
         {
             "difficulty": 3,
             "game_score": "00:00:11:000",
@@ -59,4 +59,4 @@ async def test_unknown_user(service_client):
         params={'user_name': 'user3'},
     )
     assert response.status == 200
-    assert response.json() == {'games': []}
+    assert response.json() == []

@@ -1,4 +1,4 @@
-package io.swagger.client.infrastructure
+package ru.data.infrastructure
 
 enum class ResponseType {
     Success, Informational, Redirection, ClientError, ServerError

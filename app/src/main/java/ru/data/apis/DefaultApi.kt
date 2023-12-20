@@ -11,12 +11,13 @@
  */
 package ru.data.apis
 
-import io.swagger.client.models.EmptyResponse
-import io.swagger.client.models.GameScore
-import io.swagger.client.models.UserName
-import io.swagger.client.models.UserRankResponse
+import ru.data.models.EmptyResponse
+import ru.data.models.ErrorResponse
+import ru.data.models.GameScore
+import ru.data.models.UserName
+import ru.data.models.UserRankResponse
 
-import io.swagger.client.infrastructure.*
+import ru.data.infrastructure.*
 
 class DefaultApi(basePath: kotlin.String = "https://shiny-space-fiesta-ppw9xv6g6w92rw7q-8080.app.github.dev") : ApiClient(basePath) {
 
